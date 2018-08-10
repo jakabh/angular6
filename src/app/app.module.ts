@@ -6,18 +6,22 @@ import { ContentComponent } from './content/content.component';
 import {HeaderComponent} from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {DateproviderService} from './dateprovider.service';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContentComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    {provide: DateproviderService, useClass: DateproviderService},
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

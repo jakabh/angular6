@@ -5,10 +5,27 @@ export interface DateServiceDefinition {
   getCurrentDate(): string;
 }
 
-@Injectable()
+interface UserData {
+  userName: string;
+  password: string;
+}
+
+
+@Injectable(
+  {
+    providedIn: 'root'
+  }
+)
 export class DateproviderService {
 
   constructor() {
+    let users: UserData[];
+    users = [
+      {userName: 'alma', password: 'korte'},
+      {userName: 'something', password: 'something'}
+    ];
+    console.log('Constructor of dateproviderservice');
+    console.log(JSON.stringify(users));
   }
 
   getCurrentDate(): string {
