@@ -7,6 +7,12 @@ import {HeaderComponent} from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {DateproviderService} from './dateprovider.service';
 import { UsersComponent } from './users/users.component';
+import { ShowUsersComponent } from './show-users/show-users.component';
+import { HighlightbackgroundDirective } from './highlightbackground.directive';
+import { LifeCycleSnooperDirective } from './life-cycle-snooper.directive';
+import {FormsModule} from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import {LoginModule} from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -14,10 +20,14 @@ import { UsersComponent } from './users/users.component';
     ContentComponent,
     HeaderComponent,
     FooterComponent,
-    UsersComponent
-  ],
+    UsersComponent,
+    ShowUsersComponent,
+    HighlightbackgroundDirective,
+    LifeCycleSnooperDirective],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    LoginModule
   ],
   providers: [
     {provide: DateproviderService, useClass: DateproviderService},

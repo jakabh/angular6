@@ -18,26 +18,26 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
     // this.displayDate = this.dateService.getCurrentDate();
 
-    this.dateService.getCurrentDateWithPromise().then(
-      (value) => {
-        this.displayDate = value;
-      },
-      (error) => {
-        console.log('error receiving date' + error);
-      }
-    );
-    // this.dateService.getCurrentDateWithObservable().subscribe({
-    //   next: (value) => { this.displayDate = value; },
-    //   complete: () => { console.log(' no more values to receive! '); }
-    // });
-    this.dateService.getCurrentDateWithObservable().subscribe(
-      (value) => {
-      },
-      (error) => {
-      },
-      () => {
-      }
-    )
+    // this.dateService.getCurrentDateWithPromise().then(
+    //   (value) => {
+    //     this.displayDate = value;
+    //   },
+    //   (error) => {
+    //     console.log('error receiving date' + error);
+    //   }
+    // );
+    this.dateService.getCurrentDateWithObservable().subscribe({
+      next: (value) => { this.displayDate = value; },
+      complete: () => { console.log(' no more values to receive! '); }
+    });
+    // this.dateService.getCurrentDateWithObservable().subscribe(
+    //   (value) => {
+    //   },
+    //   (error) => {
+    //   },
+    //   () => {
+    //   }
+    // )
   }
 
 }

@@ -1,0 +1,20 @@
+<div class="row justify-content-center">
+  <div class="col">
+<h3> User data: </h3>
+<ul>
+  <li>username: {{fromParent.userName}}</li>
+  <li>password: {{fromParent.password}}</li>
+  <li>imageurl: {{fromParent.imageUrl}}</li>
+</ul>
+    <img [src]="fromParent.imageUrl"
+          class="limitedImage"
+          *ngFor="let x of imageArray">
+    <div class="form-group">
+      <button type="btn btn-primary"
+              (click)="goBackward()"><</button>
+      <button type="btn btn-primary"
+              (click)="goForward()"> ></button>
+      <input type="text" [(ngModel)]="numberOfImages">
+    </div>
+</div>
+</div>
