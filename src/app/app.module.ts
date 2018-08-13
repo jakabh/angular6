@@ -13,16 +13,23 @@ import {LifeCycleSnooperDirective} from './life-cycle-snooper.directive';
 import {FormsModule} from '@angular/forms';
 import {LoginModule} from './login/login.module';
 import {RouterModule, Routes} from '@angular/router';
-import { ErrorComponent } from './error/error.component';
-import {LoginComponent} from './login/login.component';
+import {ErrorComponent} from './error/error.component';
+import {AuthenticatedGuard} from './authenticated.guard';
+import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: '/content'},
-  {path: 'content', component: ContentComponent},
-  {path: 'users', component: UsersComponent,
-  children: [
-    {path: 'showUser', component: ShowUsersComponent}
-  ]},
+  {
+    path: '', pathMatch: 'full', redirectTo: '/content'
+  },
+  {path: 'content', component: ContentComponent,
+    canActivate: [AuthenticatedGuard]
+  },
+  {
+    path: 'users', component: UsersComponent,
+    children: [
+      {path: 'showUser', component: ShowUsersComponent}
+    ]
+  },
   {path: '**', component: ErrorComponent}
 
 ]
@@ -42,6 +49,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     LoginModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

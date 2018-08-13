@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {from, Observable} from 'rxjs';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 export interface UserData {
   userName: string;
@@ -25,12 +26,26 @@ const users: UserData[] = [
   providedIn: 'root'
 })
 export class UserListService {
+  baseURL = 'http://localhost:8080';
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
   getUserList(): Observable<UserData> {
-  return  from(users);
-}
+    return from(users);
+  }
 
+  getUsersFromServer(): Observable<UserData[]> {
+    return this.http.get<UserData[]>(this.baseURL + '/teszt', {
+      params: new HttpParams().set('dummyParam', 'dummyvalue')
+    });
+  }
+
+  validateUserCredentials(username: string, password: string): Observable<boolean> {
+    return this.http.post<boolean>(this.baseURL + '/teszt', null,
+      {
+        params: new HttpParams().set('username', username)
+          .set('password', password)
+      });
+  }
 }

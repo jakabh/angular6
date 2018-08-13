@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserData} from '../user-list.service';
+import {UserData, UserListService} from '../user-list.service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +9,8 @@ import {UserData} from '../user-list.service';
 export class LoginComponent implements OnInit {
 
   userModel: UserData;
-
-  constructor() {
+  userList: UserData[];
+  constructor(private userService: UserListService) {
     this.userModel = {
       userName: '',
       password: '',
@@ -21,9 +21,21 @@ export class LoginComponent implements OnInit {
   submitForm() {
     console.log('Form was submitted with the following data:' +
       JSON.stringify(this.userModel));
+    this.userService.validateUserCredentials(this.userModel.userName,
+      this.userModel.password).subscribe((response) => {
+      console.log('credentials are valid is : ' + response);
+    })
   }
 
   ngOnInit() {
+    this.userService.getUsersFromServer().subscribe(
+      {
+        next: (value: UserData[]) => {
+          console.log('received: ' + JSON.stringify(value));
+          this.userList = value;
+        }
+      }
+    );
   }
 
 }
