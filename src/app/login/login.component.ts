@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserData, UserListService} from '../user-list.service';
+import {LSKEY, UserData, UserListService} from '../user-list.service';
+
 
 @Component({
   selector: 'app-login',
@@ -10,21 +11,35 @@ export class LoginComponent implements OnInit {
 
   userModel: UserData;
   userList: UserData[];
-  constructor(private userService: UserListService) {
-    this.userModel = {
-      userName: '',
-      password: '',
-      imageUrl: ''
-    };
+  wrongCredentials = false;
+
+  constructor(public userService: UserListService) {
+    if (userService.isLoggedIn()) {
+      this.userModel = userService.getCurrentUser();
+    } else {
+      this.userModel = {
+        userName: '',
+        password: '',
+        imageUrl: ''
+      };
+    }
+
   }
 
-  submitForm() {
+  submitForm(formControl) {
+    this.wrongCredentials = false;
     console.log('Form was submitted with the following data:' +
       JSON.stringify(this.userModel));
     this.userService.validateUserCredentials(this.userModel.userName,
-      this.userModel.password).subscribe((response) => {
+      this.userModel.password).subscribe((response: boolean) => {
       console.log('credentials are valid is : ' + response);
-    })
+      if (response) {
+        localStorage.setItem(LSKEY, this.userModel.userName);
+      }else{
+        this.wrongCredentials=true;
+      };
+      formControl.reset();
+    });
   }
 
   ngOnInit() {
@@ -36,6 +51,15 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+  }
+
+  logout(){
+    this.userService.logout();
+    this.userModel = {
+      userName: '',
+      password: '',
+      imageUrl: ''
+    };
   }
 
 }
