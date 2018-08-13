@@ -2,9 +2,9 @@
   <div class="col">
 <h3> User data: </h3>
 <ul>
-  <li>username: {{fromParent.userName}}</li>
-  <li>password: {{fromParent.password}}</li>
-  <li>imageurl: {{fromParent.imageUrl}}</li>
+  <li>username: {{fromParent?.userName}}</li>
+  <li>password: {{fromParent?.password}}</li>
+  <li>imageurl: {{fromParent?.imageUrl}}</li>
 </ul>
     <img [src]="fromParent.imageUrl"
           class="limitedImage"

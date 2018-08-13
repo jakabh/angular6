@@ -1,5 +1,62 @@
 <div class="row justify-content-center, fixedheight">
   <div class="col-md-4">
     <h3> Login component Works</h3>
+    <form (ngSubmit)="submitForm()"
+    #formControl="ngForm"
+    #formElement>
+      <fieldset [disabled]="formControl.submitted">
+      <div class="form-group">
+        <label for="usernameInput">username</label>
+        <input type="text"
+               #usernameElement
+               #usernameControl="ngModel"
+               name="username"
+               minlength="3"
+               pattern="[a-z]+"
+               id="usernameInput"
+               class="form-control"
+               required
+                [(ngModel)]="userModel.userName">
+      </div>
+      <div class="form-group">
+        <label for="passwordInput">password</label>
+        <input type="password"
+               #passwordElement
+               name="password"
+               id="passwordInput"
+               class="form-control"
+               required
+              [(ngModel)]="userModel.password">
+      </div>
+      <button type="submit"
+              [disabled]="formControl.invalid"
+              class="btn btn-primary">Submit!
+      </button>
+      </fieldset>
+    </form>
+    <p>username classes:{{usernameElement.className}}</p>
+    <p>password classes:{{passwordElement.className}}</p>
+    <p>form classes:{{formElement.className}}</p>
+  </div>
+  <div class="col-md-4">
+    <h3>username values with different tools:</h3>
+    <ul>
+      <li>
+        with local variable: {{usernameElement.value}}
+      </li>
+      <li>
+        with binding: {{userModel.userName}}
+      </li>
+      <li>
+        with form reference: {{formElement.username.value}}
+      </li>
+      <li>
+        with form control: {{formControl.controls['username']?.value}}
+      </li>
+      <li>
+        with input control: {{usernameControl.value}}
+      </li>
+    </ul>
+
   </div>
 </div>

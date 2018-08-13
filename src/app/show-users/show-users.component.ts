@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserData} from '../user-list.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-show-users',
@@ -11,7 +12,6 @@ export class ShowUsersComponent implements OnInit {
   _fromParent: UserData
   @Input()
   get fromParent() {
-    console.log('fromParent was queried');
     return this._fromParent;
   }
 
@@ -27,7 +27,6 @@ export class ShowUsersComponent implements OnInit {
   };
 
   set fromParent(valueToSet) {
-    console.log('fromParent was changed');
     this._fromParent = valueToSet;
     this.userChangedEvent.emit(this.fromParent);
   }
@@ -51,8 +50,10 @@ export class ShowUsersComponent implements OnInit {
   @Output()
   userChangedEvent = new EventEmitter<UserData>();
 
-  constructor() {
+  constructor(private activeRoute: ActivatedRoute) {
+    console.log(this.activeRoute.snapshot.paramMap.get('username'));
   }
+
 
   ngOnInit() {
   }

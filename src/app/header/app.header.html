@@ -13,3 +13,18 @@
 
 </div>
 </div>
+<div class="row justify-content-center">
+   <a routerLink="content"
+      routerLinkActive="btn-danger"
+      class="btn btn-primary">Go to content</a>
+    <a routerLink="users"
+       routerLinkActive="btn-danger"
+       class="btn btn-primary">Go to users</a>
+    <a routerLink="login"
+       class="btn btn-primary"> Go to login</a>
+
+  <button class="btn btn-primary"
+        (click)="goToUsers()">
+      Go to users from component
+  </button>
+  </div>

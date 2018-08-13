@@ -3,6 +3,8 @@ import { AppComponent } from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {ContentComponent} from './content/content.component';
 import {FooterComponent} from './footer/footer.component';
+import {LoginModule} from './login/login.module';
+import {FormsModule} from '@angular/forms';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -12,6 +14,10 @@ describe('AppComponent', () => {
         ContentComponent,
         FooterComponent
       ],
+      imports: [
+        LoginModule,
+        FormsModule
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

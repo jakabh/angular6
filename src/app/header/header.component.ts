@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component(
   {
@@ -10,8 +11,11 @@ import {Component} from '@angular/core';
 export class HeaderComponent {
   appTitle = 'Dummy Application'
 
-  constructor() {
+  constructor(private router: Router) {
 
   }
 
+  goToUsers() {
+    this.router.navigateByUrl('/users');
+  }
 }

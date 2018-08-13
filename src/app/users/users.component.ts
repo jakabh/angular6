@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserData, UserListService} from '../user-list.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -18,12 +19,15 @@ export class UsersComponent implements OnInit {
     this._selectedUser = value;
     console.log('selected user changed to: ' + value.userName);
   }
+
   get selectedUser() {
     return this._selectedUser;
   }
+
   newVariable: any;
 
-  constructor(private userService: UserListService) {
+  constructor(private userService: UserListService,
+              private router: Router) {
   }
 
   showFirstUser() {
@@ -42,6 +46,10 @@ export class UsersComponent implements OnInit {
     this.selectedButton = index;
     console.log('event from child component catched and handled:');
     console.log('button nr: ' + index + 'was pressed');
+  }
+
+  showSelectedUser() {
+    this.router.navigate(['users/showUser', { username: this.selectedUser.userName}]);
   }
 
   changeUserToShow(eventPayload) {
@@ -68,7 +76,6 @@ export class UsersComponent implements OnInit {
       {
         next: (value) => {
           this.userList.push(value);
-          console.log('Value received: ' + JSON.stringify(value));
         },
         complete: () => {
           console.log('no more values to receive');

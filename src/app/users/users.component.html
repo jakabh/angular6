@@ -22,13 +22,12 @@
                 [ngValue]="user">{{user.userName}}
         </option>
       </select>
-
+      <button class="btn btn-primary"
+              (click)="showSelectedUser()">
+        Show selected user
+      </button>
     </div>
   </div>
-  <app-show-users [fromParent]="userToShow"
-                  (userChangedEvent)="highlightButton($event)"
-                  (iterationEvent)="changeUserToShow($event)"
-                  *ngIf="userToShow"
-                  appLifeCycleSnooper
-  ></app-show-users>
+ <router-outlet>
+ </router-outlet>
 </div>

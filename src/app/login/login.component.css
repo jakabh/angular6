@@ -1,4 +1,9 @@
 div.fixedheight {
-  height:300px;
   background-color:beige;
+}
+input.ng-invalid {
+  border-color: red;
+}
+input.ng-valid {
+  border-color: green;
 }
