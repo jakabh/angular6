@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UserData} from '../user-list.service';
+import {UserData, UserListService} from '../user-list.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -50,8 +50,10 @@ export class ShowUsersComponent implements OnInit {
   @Output()
   userChangedEvent = new EventEmitter<UserData>();
 
-  constructor(private activeRoute: ActivatedRoute) {
-    console.log(this.activeRoute.snapshot.paramMap.get('username'));
+  constructor(private activeRoute: ActivatedRoute,
+               private userService: UserListService) {
+    const userToShow = this.activeRoute.snapshot.paramMap.get('username');
+
   }
 
 

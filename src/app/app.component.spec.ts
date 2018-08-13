@@ -5,6 +5,7 @@ import {ContentComponent} from './content/content.component';
 import {FooterComponent} from './footer/footer.component';
 import {LoginModule} from './login/login.module';
 import {FormsModule} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -16,7 +17,8 @@ describe('AppComponent', () => {
       ],
       imports: [
         LoginModule,
-        FormsModule
+        FormsModule,
+        RouterTestingModule
       ]
     }).compileComponents();
   }));

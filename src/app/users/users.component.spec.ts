@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UsersComponent } from './users.component';
 import {FormsModule} from '@angular/forms';
 import {ShowUsersComponent} from '../show-users/show-users.component';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -12,7 +13,8 @@ describe('UsersComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ UsersComponent,
       ShowUsersComponent],
-      imports: [FormsModule]
+      imports: [FormsModule,
+      RouterTestingModule]
     })
     .compileComponents();
   }));
