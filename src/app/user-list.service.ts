@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {from, Observable} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 export interface UserData {
   userName: string;
   password: string;
   imageUrl: string;
 }
+export const LSKEY = 'currentUser';
 
 const users: UserData[] = [
   {userName: 'Pista', password: '1234', imageUrl: 'https://i.ytimg.com/vi/_WbT4_c2Q78/maxresdefault.jpg'},
@@ -40,12 +41,22 @@ export class UserListService {
       params: new HttpParams().set('dummyParam', 'dummyvalue')
     });
   }
-
+  isLoggedIn() {
+    let username = localStorage.getItem(LSKEY);
+    return username ? true : false ;
+  }
   validateUserCredentials(username: string, password: string): Observable<boolean> {
-    return this.http.post<boolean>(this.baseURL + '/teszt', null,
+
+    let body = new URLSearchParams();
+    body.set('username', username);
+    body.set('password', password);
+
+    return this.http.post<boolean>(this.baseURL + '/teszt',
+      body.toString(),
       {
-        params: new HttpParams().set('username', username)
-          .set('password', password)
+        headers: new HttpHeaders(
+          {'Content-Type': 'application/x-www-form-urlencoded'}
+        )
       });
   }
 }
