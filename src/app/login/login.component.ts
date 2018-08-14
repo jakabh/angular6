@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LSKEY, UserData, UserListService} from '../user-list.service';
+import {LSKEY, TOKENKEY, UserData, UserListService} from '../user-list.service';
 
 
 @Component({
@@ -31,15 +31,19 @@ export class LoginComponent implements OnInit {
     console.log('Form was submitted with the following data:' +
       JSON.stringify(this.userModel));
     this.userService.validateUserCredentials(this.userModel.userName,
-      this.userModel.password).subscribe((response: boolean) => {
-      console.log('credentials are valid is : ' + response);
-      if (response) {
-        localStorage.setItem(LSKEY, this.userModel.userName);
-      }else{
-        this.wrongCredentials=true;
-      };
-      formControl.reset();
-    });
+      this.userModel.password).subscribe((response) => {
+        if (response) {
+          localStorage.setItem(LSKEY, this.userModel.userName);
+          localStorage.setItem(TOKENKEY, response.token);
+        } else {
+          this.wrongCredentials = true;
+        }
+        formControl.reset();
+      },
+      (error) => {
+        formControl.reset();
+        this.wrongCredentials = true;
+      });
   }
 
   ngOnInit() {
@@ -53,7 +57,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  logout(){
+  logout() {
     this.userService.logout();
     this.userModel = {
       userName: '',

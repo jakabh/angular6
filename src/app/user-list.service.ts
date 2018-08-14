@@ -3,6 +3,7 @@ import {from, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 export const LSKEY = 'currentUser';
+export const TOKENKEY = 'bearertoken';
 
 export interface UserData {
   userName: string;
@@ -43,12 +44,12 @@ export class UserListService {
     });
   }
 
-  validateUserCredentials(username: string, password: string): Observable<boolean> {
+  validateUserCredentials(username: string, password: string): Observable<any> {
     console.log('sending username:' +username + 'password: ' + password);
     let body = new URLSearchParams();
     body.set('username', username);
     body.set('password', password);
-    return this.http.post<boolean>(this.baseURL + '/teszt', body.toString(), {
+    return this.http.post(this.baseURL + '/authorize', body.toString(), {
       headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
     });
 
