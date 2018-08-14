@@ -2,7 +2,10 @@ package services;
 
 import models.UserData;
 
+import java.util.ArrayList;
+
 public class UserDataDAO {
+
     private final UserData[] dummyData = {
             new UserData("janos", "abcd", "dummyimage"),
             new UserData("iancu", "cdef", "dumyimage")

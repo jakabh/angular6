@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 @WebServlet("/teszt")
 public class TesztServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println(request.getAttribute("loggedInAs"));
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
