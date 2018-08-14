@@ -1,5 +1,10 @@
 package endpoints;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jwt.JwtManager;
+import models.UserData;
+import services.UserDataDAO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +19,18 @@ import java.util.logging.Logger;
         urlPatterns = {"/authorize"})
 public class Authorization extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if (username != null && password != null ) {
+            UserDataDAO userDAO = new UserDataDAO();
+            UserData userData = userDAO.getUserData(username);
+            if ( userData != null && userData.getPassword().equals(password)) {
+                response.getWriter().println(
+                        "{ \"token\": \""+JwtManager.getInstance().createToken(username)+"\" }");
+            } else {
+                response.sendError(401);
+            }
+            }
 
     }
 
