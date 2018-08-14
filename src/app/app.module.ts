@@ -15,13 +15,15 @@ import {LoginModule} from './login/login.module';
 import {RouterModule, Routes} from '@angular/router';
 import {ErrorComponent} from './error/error.component';
 import {AuthenticatedGuard} from './authenticated.guard';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {MyHttpInterceptor} from './http-interceptor';
 
 const appRoutes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: '/content'
   },
-  {path: 'content', component: ContentComponent,
+  {
+    path: 'content', component: ContentComponent,
     canActivate: [AuthenticatedGuard]
   },
   {
@@ -54,6 +56,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     {provide: DateproviderService, useClass: DateproviderService},
+    {provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

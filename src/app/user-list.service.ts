@@ -73,5 +73,6 @@ export class UserListService {
 
   logout() {
     localStorage.removeItem(LSKEY);
+    localStorage.removeItem(TOKENKEY);
   }
 }
