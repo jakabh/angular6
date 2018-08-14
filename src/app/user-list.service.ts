@@ -8,7 +8,7 @@ export interface UserData {
   imageUrl: string;
 }
 export const LSKEY = 'currentUser';
-
+export const TOKENKEY = 'webtoken';
 const users: UserData[] = [
   {userName: 'Pista', password: '1234', imageUrl: 'https://i.ytimg.com/vi/_WbT4_c2Q78/maxresdefault.jpg'},
   {
@@ -45,13 +45,13 @@ export class UserListService {
     let username = localStorage.getItem(LSKEY);
     return username ? true : false ;
   }
-  validateUserCredentials(username: string, password: string): Observable<boolean> {
+  validateUserCredentials(username: string, password: string): Observable<any> {
 
     let body = new URLSearchParams();
     body.set('username', username);
     body.set('password', password);
 
-    return this.http.post<boolean>(this.baseURL + '/teszt',
+    return this.http.post(this.baseURL + '/authorize',
       body.toString(),
       {
         headers: new HttpHeaders(

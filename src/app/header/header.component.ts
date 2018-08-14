@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {UserListService} from '../user-list.service';
 
 @Component(
   {
@@ -11,8 +12,14 @@ import {Router} from '@angular/router';
 export class HeaderComponent {
   appTitle = 'Dummy Application'
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService: UserListService) {
 
+  }
+
+  makeRequest() {
+    this.userService.getUsersFromServer().subscribe((resp) => {
+      console.log('dummy request made');
+    });
   }
 
   goToUsers() {

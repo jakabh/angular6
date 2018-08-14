@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LSKEY, UserData, UserListService} from '../user-list.service';
+import {LSKEY, TOKENKEY, UserData, UserListService} from '../user-list.service';
 
 @Component({
   selector: 'app-login',
@@ -32,23 +32,29 @@ export class LoginComponent implements OnInit {
       if (response) {
         this.loggedIn = true;
         this.wrongCredentials = false;
-        this.login();
+        this.login(response.token);
       } else {
         this.wrongCredentials = true;
         this.loggedIn = false;
       }
     });
   }
-  login(){
-    localStorage.setItem(LSKEY,this.userModel.userName);
+
+  login(token) {
+    localStorage.setItem(LSKEY, this.userModel.userName);
+    console.log('saving token:' + token);
+    localStorage.setItem(TOKENKEY, token);
     this.loggedIn = true;
   }
-  logout(){
-    if ( localStorage.getItem(LSKEY) ){
+
+  logout() {
+    if (localStorage.getItem(LSKEY)) {
       localStorage.removeItem(LSKEY);
+      localStorage.removeItem(TOKENKEY);
       this.loggedIn = false;
     }
   }
+
   ngOnInit() {
     this.userService.getUsersFromServer().subscribe(
       {
