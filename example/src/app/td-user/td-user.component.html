@@ -1,0 +1,54 @@
+<div class="holder">
+<h1>Template driven form</h1>
+<h2>New user data submission:</h2>
+<form #formElement #formControl="ngForm" (ngSubmit)="submitUserData()">
+  <label for="firstname">
+    First name:
+    <input type="text"
+            id="firstname"
+            #localInputReference
+            required
+            name="firstname"
+            [(ngModel)]="myUserData.firstName"
+            >
+  </label>
+
+  <label for="lastname">
+    Last name:
+    <input type="text"
+           id="lastname"
+           required
+           name="lastname"
+          [(ngModel)]="myUserData.lastName">
+  </label>
+  <label for="username">
+    Username:
+  <input type="text"
+         id="username"
+         required
+         name="username"
+        [(ngModel)]="myUserData.username">
+</label>
+  <label for="password">
+    Password:
+  <input type="password"
+         id="password"
+         required
+         name="password"
+        [(ngModel)]="myUserData.password">
+
+
+  </label>
+  <button type="submit" [disabled]="!formControl.valid">Send!</button>
+  <!--<button type="submit" *ngIf="formControl.valid">Send!</button>-->
+  <p *ngIf="errorOccured" class="somemeanerror">User data submission failed!</p>
+</form>
+<h2>Data from the First name input field:</h2>
+<ul>
+  <li>{{localInputReference.value}}</li>
+  <li>{{myUserData.firstName}}</li>
+  <li>{{formControl.controls['firstname']?.value}}</li>
+  <li>{{formElement.firstname.value}}</li>
+</ul>
+<router-outlet></router-outlet>
+</div>

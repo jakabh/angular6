@@ -1,0 +1,27 @@
+<h1>Available navigation links:</h1>
+<ul>
+  <li>
+    <a routerLink="tduser">Template driven form </a>
+  </li>
+  <li>
+    <!--<a routerLink="reactuser">Reactive form </a>-->
+    <a [routerLink]="[{outlets: { primary: ['reactuser']}}]">reactive form</a>
+  </li>
+  <li>
+    <button (click)="goToReactiveForm()">Go to reactive form</button>
+  </li>
+  <li>
+    <a [routerLink]="[{outlets: { popup: ['popup']}}]">Show popup</a>
+  </li>
+  <li>
+    <a [routerLink]="[{outlets:{ popup: ['popup'],primary: ['tduser']} }]">
+      TD user and popup
+    </a>
+  </li>
+  <li>
+    <a routerLink="tduser/comp2">usercomp2 </a>
+  </li>
+  <li>
+    <a routerLink="tduser/comp1">useromp1 </a>
+  </li>
+</ul>

@@ -1,0 +1,15 @@
+form {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: column;
+  margin:30px;
+  width: 200px;
+}
+
+input.ng-invalid {
+  background-color:lightsalmon;
+}
+input.ng-valid {
+  background-color: antiquewhite;
+}

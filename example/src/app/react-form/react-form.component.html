@@ -1,0 +1,38 @@
+<h1>Reactive form:</h1>
+<form [formGroup]="loginForm"
+      #formReference
+      (ngSubmit)="submitUserData()">
+
+  <label for="firstname">
+    First Name
+    <input type="text"
+            id="firstname"
+           formControlName="firstName"
+            >
+  </label>
+  <label for="lastName">
+    Last name
+    <input type="text"
+           id="lastName"
+           formControlName="lastName"
+    >
+  </label>
+  <label for="username">
+    Username
+    <input type="text"
+           id="username"
+           formControlName="username"
+    >
+  </label>
+  <label for="password">
+    Password
+    <input type="text"
+           id="password"
+           formControlName="password"
+    >
+    </label>
+  <button type="submit">Send!</button>
+
+</form>
+<p>Component variable first name: {{myUserData.firstName}}</p>
+<p>Styels: {{formReference.className}}</p>

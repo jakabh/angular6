@@ -1,0 +1,22 @@
+<app-navigation></app-navigation>
+<div>
+<h1>List of users:</h1>
+<table>
+  <thead>
+    <td>First Name</td>
+  <td>Last Name </td>
+  <td>Username </td>
+  <td>password</td>
+  </thead>
+  <tr *ngFor="let currentUser of myUserList; let i of index">
+    <td>{{currentUser.firstName}}</td>
+    <td>{{currentUser.lastName}}</td>
+    <td>{{currentUser.username}}</td>
+    <td>{{currentUser.password}}</td>
+  </tr>
+</table>
+</div>
+<!--<app-td-user></app-td-user>-->
+<hr>
+<router-outlet></router-outlet>
+<router-outlet name="popup"></router-outlet>
