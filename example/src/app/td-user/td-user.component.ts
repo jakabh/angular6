@@ -27,7 +27,7 @@ export class TdUserComponent implements OnInit {
       },
       (error) => {
         this.errorOccured = true;
-        console.loge(`cannot save due to: ${error}`);
+        console.log(`cannot save due to: ${error}`);
       }
     );
   }

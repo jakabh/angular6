@@ -13,7 +13,9 @@ import { PopupComponent } from './popup/popup.component';
 import { FirstsubComponent } from './firstsub/firstsub.component';
 import { SecondsubComponent } from './secondsub/secondsub.component';
 import {AuthenticatedGuard} from './authenticated.guard';
+import { LoginComponent } from './login/login.component';
 const routeDefinitions: Routes = [
+  {path: 'login' , component: LoginComponent},
   {path: 'tduser', component: TdUserComponent ,
     canActivate : [ AuthenticatedGuard],
    children: [
@@ -22,7 +24,7 @@ const routeDefinitions: Routes = [
    ]},
   {path: 'popup', component: PopupComponent, outlet: 'popup'},
   {path: 'reactuser', component: ReactFormComponent},
-  {path: '', redirectTo: '/tduser', pathMatch: 'full'},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: '**', component: ErrorComponent }
 ]
 @NgModule({
@@ -34,7 +36,8 @@ const routeDefinitions: Routes = [
     NavigationComponent,
     PopupComponent,
     FirstsubComponent,
-    SecondsubComponent
+    SecondsubComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

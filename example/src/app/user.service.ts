@@ -24,7 +24,15 @@ export class UserService {
   }
   sendNewUserData( userData: UserTo ): Observable<boolean> {
     const targetURL = `${this.baseUrl}/users`;
-    return this.myHttpService.post(targetURL, userData);
+    return this.myHttpService.post<boolean>(targetURL, userData);
+  }
+  loginUser( userData: UserTo): Observable<boolean> {
+    const targetURL = `${this.baseUrl}/login`;
+    return this.myHttpService.post<boolean>(targetURL,{
+      'username': userData.username,
+      'password': userData.password
+    });
+
   }
   notifyDataClients(){
     console.log('notify called');
